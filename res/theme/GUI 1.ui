@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<component type="Form" name="GUI 1" cloudDestinationProperty="GUI 1" layout="FlowLayout" flowLayoutFillRows="false" flowLayoutAlign="4" flowLayoutValign="4" >
+  <component type="Container" name="Container" cloudDestinationProperty="Container" focusable="false" scrollVisible="false" layout="BoxLayout" boxLayoutAxis="Y" >
+    <component type="ImageViewer" name="Logo" cloudDestinationProperty="Logo" focusable="false" snapToGrid="false" >
+      <custom name="image" type="com.codename1.ui.Image" value="icon.png" />
+    </component>
+    <component type="TextField" name="Email" cloudBoundProperty="text" cloudDestinationProperty="Email" focusable="true" text="" hint="Email" >
+    </component>
+    <component type="TextField" name="Password" cloudBoundProperty="text" cloudDestinationProperty="Password" verticalAlignment="4" text="" hint="Password" >
+    </component>
+    <component type="Button" name="Login" cloudDestinationProperty="Button" focusable="true" text="Login" >
+    </component>
+    <component type="Button" name="Register" cloudDestinationProperty="Register" text="Register" >
+    </component>
+  </component>
+</component>
