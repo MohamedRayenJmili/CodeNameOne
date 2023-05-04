@@ -96,32 +96,32 @@ c.setDate(date);
 
     
     public Commande addCommande(Commande c){
-      int idclent = .getUser();
-        String etatcommznde = s.getLocalisationStation();
-        string destinationcommande =  s.getVeloStation();
-        string prixcommande =;
-        string paymentcommande =;
-                
-        //String url = Statics.BASE_URL + "create?name=" + t.getName() + "&status=" + t.getStatus();
-        //String url = Statics.BASE_URL + "create?nomStation=" + s.getNomStation() + "&localisationStation=" + s.getLocalisationStation() + "&veloStation=" + s.getVeloStation();
-//        String url = DataSource.BASE_URL + "add/" + name + "/" + vill + "/" + nbr;
-        String url = Statics.URL_COMMUN+ "/gson/Addcommande?nomStation=aaa&localisationStation=bbb&veloStation=123";
-       //////////// ul 2 
-        String url2 = Statics.URL_COMMUN+ "/gson/Addcommande?client=6&etat=Pending&destination=Tunis+Centre+Ville\"%20+%20\"&prix=550.00&payment=chk6-ezaeazeazezaeaz";
-        System.out.println(url);
-        //ConnectionRequest.setCertificateValidation(false);
-
-        req.setUrl(url);
-        req.setPost(false);
-        req.addResponseListener(new ActionListener<NetworkEvent>() {
-            @Override
-            public void actionPerformed(NetworkEvent evt) {
-                result = req.getResponseCode() == 200; //Code HTTP 200 OK
-                req.removeResponseListener(this);
-            }
-        });
-        NetworkManager.getInstance().addToQueueAndWait(req);
-
         
+//        String etatcommznde = s.getLocalisationStation();
+//        string destinationcommande =  s.getVeloStation();
+//        string prixcommande =;
+//        string paymentcommande =;
+//                
+//        //String url = Statics.BASE_URL + "create?name=" + t.getName() + "&status=" + t.getStatus();
+//        //String url = Statics.BASE_URL + "create?nomStation=" + s.getNomStation() + "&localisationStation=" + s.getLocalisationStation() + "&veloStation=" + s.getVeloStation();
+////        String url = DataSource.BASE_URL + "add/" + name + "/" + vill + "/" + nbr;
+//        String url = Statics.URL_COMMUN+ "/gson/Addcommande?nomStation=aaa&localisationStation=bbb&veloStation=123";
+//       //////////// ul 2 
+//        String url2 = Statics.URL_COMMUN+ "/gson/Addcommande?client=6&etat=Pending&destination=Tunis+Centre+Ville\"%20+%20\"&prix=550.00&payment=chk6-ezaeazeazezaeaz";
+//        System.out.println(url);
+//        //ConnectionRequest.setCertificateValidation(false);
+//
+//        req.setUrl(url);
+//        req.setPost(false);
+//        req.addResponseListener(new ActionListener<NetworkEvent>() {
+//            @Override
+//            public void actionPerformed(NetworkEvent evt) {
+//                result = req.getResponseCode() == 200; //Code HTTP 200 OK
+//                req.removeResponseListener(this);
+//            }
+//        });
+//        NetworkManager.getInstance().addToQueueAndWait(req);
+//
+//        
     return c;}
 }
