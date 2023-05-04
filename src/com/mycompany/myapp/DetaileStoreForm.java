@@ -23,10 +23,9 @@ public class DetaileStoreForm extends BaseForm {
         setToolbar(tb);
                 tb.setUIID("Toolbar");
         getTitleArea().setUIID("Toolbar");
-        Form previous = Display.getInstance().getCurrent();
-        tb.setBackCommand("", e -> previous.showBack());
+        //Form previous = Display.getInstance().getCurrent();
+        //tb.setBackCommand("", e -> previous.showBack());
         setTitle("Detaile d'un store");
-        setUIID("ListStore");        
         tb.addSearchCommand(e -> {});
     }
     
