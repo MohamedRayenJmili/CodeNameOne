@@ -11,6 +11,7 @@ import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.util.Resources;
 import com.mycompany.myapp.Entities.Commande;
+import com.mycompany.myapp.Entities.User;
 import com.mycompany.myapp.Service.Service_Commande;
 import java.util.ArrayList;
 
@@ -39,32 +40,33 @@ public class CommandeForm extends BaseForm {
         {
             System.out.println("this is a asingle commandes "+c);
            // addElement(c);
-           
+           Container CommandeContainer=new Container();
+           try{
+            CommandeContainer=Service_Commande.getInstance().commandeinsideContainer(c);
            // Full COmmande
-                             Container CommandeContainer=new Container(BoxLayout.y());
-                             // First Line in Container
-                             Container idetatContainer=new Container(BoxLayout.x());
-                                  idetatContainer.add(new Label("Id :"+String.valueOf(c.getId())));
-           idetatContainer.add(new Label("Etat :"+c.getEtat()));
-           //Second Line in Container
-                             Container DatedestinationContainer= new Container(BoxLayout.x());
-                         DatedestinationContainer.add(new Label("Date :"+String.valueOf(c.getDate())));
-                         Container destionationContainer=new Container(BoxLayout.y());
-                         destionationContainer.add(new Label("Destionation : "));
-                         destionationContainer.add(new Label(c.getDestination()));
-                         DatedestinationContainer.add(destionationContainer);
-                             
-                             
-                             CommandeContainer.add(idetatContainer);
-                             CommandeContainer.add(DatedestinationContainer);
+              
+} catch (Exception e) {
+    e.printStackTrace();
+}
+                                
+
                    container.add(CommandeContainer);
         }
+        
+//        Commande c=new Commande();
+//        c.setEtat("Pending");
+//        c.setDestination("Tunis Centre Ville");
+//        c.setPayment("chk-zaezaezaeazezaeza");
+//        c.setPrix(52.0f);
+//        c.setUser(new User(6));
+//        Commande commande=Service_Commande.getInstance().addCommande(c);
+//        System.out.println("nEW Commade ID "+commande);
         super.add(container);
     super.show();
     }
     
     
-    
+   
     
     
 }
