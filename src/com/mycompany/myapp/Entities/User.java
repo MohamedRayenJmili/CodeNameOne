@@ -27,6 +27,10 @@ public class User {
     public User() {
     }
 
+    public User(int id) {
+        this.id = id;
+    }
+
     public User(int id, String email, String roles, String password, String nom, String prenom, 
             int age, String adresse, String image, String genre, String phone, int etat) {
         this.id = id;

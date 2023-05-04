@@ -4,6 +4,8 @@
  */
 package com.mycompany.myapp.Entities;
 
+import java.util.Objects;
+
 /**
  *
  * @author Plop
@@ -112,7 +114,29 @@ public class Detail_Commande {
        dc.setQuantite(quantite);
        dc.setPrix_total((float)p.getPrix()*quantite);
        dc.setEtat("Pending");
-       System.out.println("Conversion Terminée");
+     
   }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 37 * hash + Objects.hashCode(this.produit);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Detail_Commande other = (Detail_Commande) obj;
+        return Objects.equals(this.produit, other.produit);
+    }
     
 }

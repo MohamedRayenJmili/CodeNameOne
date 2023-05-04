@@ -4,7 +4,6 @@
  */
 package com.mycompany.myapp.Entities;
 
-import java.util.Date;
 
 /**
  *
@@ -17,7 +16,7 @@ public class Commande {
     private String destination;
     private float prix;
     private String etat;
-    private Date date;
+    private String date;
     private String Payment;
     public Commande() {
     }
@@ -38,7 +37,7 @@ public class Commande {
         return "Commande{" + "id=" + id + ", user=" + user + ", destination=" + destination + ", prix=" + prix + ", etat=" + etat + ", date=" + date + '}';
     }
     
-    public Commande(User user, String destination, float prix, String etat, Date date) {
+    public Commande(User user, String destination, float prix, String etat, String date) {
         this.user = user;
         this.destination = destination;
         this.prix = prix;
@@ -46,7 +45,7 @@ public class Commande {
         this.date = date;
     }
 
-    public Commande(int id, User user, String destination, float prix, String etat, Date date) {
+    public Commande(int id, User user, String destination, float prix, String etat, String date) {
         this.id = id;
         this.user = user;
         this.destination = destination;
@@ -95,11 +94,11 @@ public class Commande {
         this.etat = etat;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
