@@ -27,6 +27,7 @@ import com.codename1.ui.Component;
 import com.codename1.ui.Container;
 import com.codename1.ui.Font;
 import com.codename1.ui.FontImage;
+import com.codename1.ui.Form;
 import com.codename1.ui.Image;
 import com.codename1.ui.TextArea;
 import com.codename1.ui.events.ActionEvent;
@@ -38,26 +39,29 @@ import com.codename1.ui.plaf.Border;
 import com.codename1.ui.plaf.Style;
 import com.codename1.ui.plaf.UIManager;
 import com.codename1.ui.table.TableLayout;
+import com.mycompany.myapp.Entities.Detail_Commande;
+import com.mycompany.myapp.Entities.Forms.CommandesForm.PanierForm;
 import com.mycompany.myapp.Entities.Produit;
+import com.mycompany.myapp.Entities.StaticPanier;
 /**
  *
  * @author Plop
  */
-public class Service_Commande {
+public class Service_Panier {
 
     public ArrayList<Commande> Commandes;
     public Commande Commande;
     private ConnectionRequest req;
-    public static Service_Commande instance = null;
+    public static Service_Panier instance = null;
 
-    public static Service_Commande getInstance() {
+    public static Service_Panier getInstance() {
         if (instance == null) {
-            instance = new Service_Commande();
+            instance = new Service_Panier();
         }
         return instance;
     }
 
-    private Service_Commande() {
+    private Service_Panier() {
         req = new ConnectionRequest();
     }
 
@@ -150,8 +154,12 @@ public class Service_Commande {
         Float prixcommande =c.getPrix();
         String paymentcommande =c.getPayment();
                 Commande commande=new Commande();
+        //String url = Statics.BASE_URL + "create?name=" + t.getName() + "&status=" + t.getStatus();
+        //String url = Statics.BASE_URL + "create?nomStation=" + s.getNomStation() + "&localisationStation=" + s.getLocalisationStation() + "&veloStation=" + s.getVeloStation();
+//        String url = DataSource.BASE_URL + "add/" + name + "/" + vill + "/" + nbr;
        //////////// ul 2 
-        String url = Statics.URL_COMMUN+ "gson/Addcommande?client=6&etat="+etatcommande+"&destination="+destinationcommande+"&payment="+paymentcommande+"";
+        String url = Statics.URL_COMMUN+ "gson/Addcommande?client=6&etat="+etatcommande+"&destination="+destinationcommande+"&"
+                + "prix="+prixcommande+"&payment="+paymentcommande+"";
         System.out.println(url);
         //ConnectionRequest.setCertificateValidation(false);
 
@@ -169,35 +177,8 @@ public class Service_Commande {
         
     return Commande;}
     
-    public void addDetail_Commande(Produit produit,int quantite,Commande c){
-        
-        String etatcommande = c.getEtat();
-        String destinationcommande =  c.getDestination();
-        Float prixcommande =c.getPrix();
-        String paymentcommande =c.getPayment();
-                Commande commande=new Commande();
-       //////////// ul 2 
-        String url = Statics.URL_COMMUN+ "gson/AddDetail?commande="+c.getId()+"&etat=Pending&quantite="+quantite+"&produit="+produit.getId()+"";
-        System.out.println(url);
-        //ConnectionRequest.setCertificateValidation(false);
-
-        req.setUrl(url);
-        req.setPost(false);
-        req.addResponseListener(new ActionListener<NetworkEvent>() {
-            @Override
-            public void actionPerformed(NetworkEvent evt) {
-                Commande = getidCommande(new String(req.getResponseData())) ; //Code HTTP 200 OK
-                req.removeResponseListener(this);
-            }
-        });
-        NetworkManager.getInstance().addToQueueAndWait(req);
-
-        
     
-    }
-    
-    
- public Container commandeinsideContainer(Commande c) {
+ public Container PanierInsideContainer(Map.Entry<Produit,Integer> c) {
     Container CommandeContainer = new Container(new BorderLayout());
     CommandeContainer.getAllStyles().setBorder(Border.createLineBorder(2, 0x000000));
     CommandeContainer.getAllStyles().setMarginUnit(Style.UNIT_TYPE_DIPS);
@@ -207,34 +188,53 @@ public class Service_Commande {
     Container SecondContainer = new Container(BoxLayout.y());
     // First Line in Container
     Container idetatContainer = new Container(BoxLayout.x());
+    Produit p=c.getKey();
+    Integer quantite=c.getValue();
     idetatContainer.getAllStyles().setFont(Font.createSystemFont(Font.FACE_MONOSPACE, Font.STYLE_BOLD, 14));
-    idetatContainer.add(new Label("Id :"));
-    idetatContainer.add(new Label(String.valueOf(c.getId())));
-    idetatContainer.add(new Label(" Etat :"));
-    idetatContainer.add(new Label(c.getEtat()));
+    idetatContainer.add(new Label("Produit :"));
+    idetatContainer.add(new Label(String.valueOf(p.getNom())));
+    idetatContainer.add(new Label(" Quantite :"));
+    Label quantiteLabel=new Label(String.valueOf(quantite));
+    idetatContainer.add("0"+quantiteLabel);
 
     // Second Line in Container
-    Container destionationContainer = new Container(BoxLayout.y());
-    destionationContainer.add(new Label("Destionation : "));
-    destionationContainer.add(new Label(c.getDestination()));
+    Container ProduitContainer = new Container(BoxLayout.y());
+    ProduitContainer.add(new Label("Prix : "));
+    ProduitContainer.add(new Label(String.valueOf(p.getPrix()*quantite)));
 
     SecondContainer.add(idetatContainer);
-    SecondContainer.add(destionationContainer);
+    SecondContainer.add(ProduitContainer);
 
-    Container dateContainer = new Container(BoxLayout.x());
-    dateContainer.add(new Label("Date: " + c.getDate()));
-    SecondContainer.add(dateContainer);
-
-    Button btn = new Button("Details");
+   
+    Button btn = new Button("Add One");
     btn.getAllStyles().setBgColor(0xFAA276);
     btn.getAllStyles().setFont(Font.createSystemFont(Font.FACE_MONOSPACE, Font.STYLE_BOLD, 14));
     btn.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent evt) {
-            actionButtonClicked(c.getId());
+          StaticPanier.getInstance().addItemToPanier(p);
+    // do something with the commandId
+  quantiteLabel.setText(String.valueOf(StaticPanier.getInstance().getquantite(p)));
         }
     });
-    CommandeContainer.add(BorderLayout.EAST,btn);
+    Button btn2 = new Button("Remove One");
+    btn2.getAllStyles().setBgColor(0xFAA276);
+    btn2.getAllStyles().setFont(Font.createSystemFont(Font.FACE_MONOSPACE, Font.STYLE_BOLD, 14));
+    btn2.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent evt) {
+                StaticPanier.getInstance().removeItemFromPanier(p);
+                 if (StaticPanier.getInstance().getquantite(p)==0)
+                 CommandeContainer.remove();
+                 else 
+                       quantiteLabel.setText(String.valueOf(StaticPanier.getInstance().getquantite(p)));
+
+        }
+    });
+    Container buttonsContainer=new Container(BoxLayout.y());
+    buttonsContainer.add(btn);
+        buttonsContainer.add(btn2);
+        CommandeContainer.add(BorderLayout.EAST,buttonsContainer);
             CommandeContainer.add(BorderLayout.CENTER,SecondContainer);
 
   
@@ -245,8 +245,5 @@ public class Service_Commande {
 
 
 
-private void actionButtonClicked(int commandId) {
-    // do something with the commandId
-}
 
 }

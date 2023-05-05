@@ -13,6 +13,7 @@ import com.codename1.ui.layouts.LayeredLayout;
 import com.codename1.ui.layouts.Layout;
 import com.codename1.ui.plaf.Style;
 import com.codename1.ui.util.Resources;
+import com.mycompany.myapp.Entities.Forms.CommandesForm.PanierForm;
 
 
 public class BaseForm extends Form {
@@ -63,6 +64,7 @@ public class BaseForm extends Form {
          tb.addMaterialCommandToSideMenu("Profile", FontImage.MATERIAL_ACCOUNT_CIRCLE, e->new ProfileForm(res).show());
          tb.addMaterialCommandToSideMenu("Commande", FontImage.MATERIAL_PAYMENTS, e->new CommandeForm(res).show());
                   tb.addMaterialCommandToSideMenu("Commande", FontImage.MATERIAL_EVENT, e->new EvenementForm(res).show());
+         tb.addMaterialCommandToSideMenu("Panier", FontImage.MATERIAL_PAYMENTS, e->new PanierForm(res).show());
 
          tb.addMaterialCommandToSideMenu("logout", FontImage.MATERIAL_LOGOUT, e->new SignInForm(res).show());
 // tb.addMaterialCommandToSideMenu("Produits", FontImage.MATERIAL_LIST, e->{ShowProduits();});

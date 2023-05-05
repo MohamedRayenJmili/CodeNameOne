@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.myapp;
+package com.mycompany.myapp.Entities.Forms.CommandesForm;
 
+import com.mycompany.myapp.*;
 import com.codename1.ui.Container;
 import com.codename1.ui.Label;
 import com.codename1.ui.Toolbar;
@@ -61,7 +62,6 @@ public class CommandeForm extends BaseForm {
 //        c.setUser(new User(6));
 //        Commande commande=Service_Commande.getInstance().addCommande(c);
 //        System.out.println("nEW Commade ID "+commande);
-container.getStyle().setMarginTop(15);
         super.add(container);
     super.show();
     }

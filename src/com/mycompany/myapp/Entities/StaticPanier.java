@@ -54,6 +54,14 @@ public static void removeItemFromPanier(Produit produit) {
     }
 }
 
+public static int getquantite(Produit produit) {
+    Integer quantite = panierCourant.get(produit);
+    if (quantite == null) {
+        return 0;
+    } else {
+        return quantite;
+    }
+}
     
     
 }
