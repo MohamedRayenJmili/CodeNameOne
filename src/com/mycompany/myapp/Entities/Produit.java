@@ -12,7 +12,6 @@ package com.mycompany.myapp.Entities;
 public class Produit {
       private int id;
     private String nom;
-   
     private String photo;
     private double prix;
     private int quantite;
@@ -25,6 +24,11 @@ public class Produit {
     
     
  public  Produit() {
+    }
+
+    public Produit(int id, String nom) {
+        this.id = id;
+        this.nom = nom;
     }
 
 

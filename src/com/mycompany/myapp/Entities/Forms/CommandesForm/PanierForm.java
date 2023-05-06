@@ -65,7 +65,7 @@ StaticPanier.getInstance().addItemToPanier(p2);
 StaticPanier.getInstance().addItemToPanier(p3);
 StaticPanier.getInstance().addItemToPanier(p3);
         
-        Toolbar tb = new Toolbar(true);
+        Toolbar tb = new Toolbar(false);
         setToolbar(tb);
                 tb.setUIID("Toolbar");
         getTitleArea().setUIID("Toolbar");

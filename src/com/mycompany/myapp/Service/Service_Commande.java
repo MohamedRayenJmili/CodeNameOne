@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Date;
 import com.codename1.ui.Button;
+import com.codename1.ui.ComboBox;
 import com.codename1.ui.Component;
 import com.codename1.ui.Container;
 import com.codename1.ui.Font;
@@ -38,6 +39,7 @@ import com.codename1.ui.plaf.Border;
 import com.codename1.ui.plaf.Style;
 import com.codename1.ui.plaf.UIManager;
 import com.codename1.ui.table.TableLayout;
+import com.mycompany.myapp.Entities.Detail_Commande;
 import com.mycompany.myapp.Entities.Produit;
 /**
  *
@@ -46,6 +48,7 @@ import com.mycompany.myapp.Entities.Produit;
 public class Service_Commande {
 
     public ArrayList<Commande> Commandes;
+      public ArrayList<Detail_Commande> DetailCommandes;
     public Commande Commande;
     private ConnectionRequest req;
     public static Service_Commande instance = null;
@@ -99,6 +102,45 @@ public class Service_Commande {
         return Commandes;
 
     }
+    public ArrayList<Detail_Commande> getlistDetailscommandes(String jsontext) {
+        try {
+            DetailCommandes = new ArrayList<>();
+            JSONParser j = new JSONParser();
+            Map<String, Object> CommandesListJson = j.parseJSON(new CharArrayReader(jsontext.toCharArray()));
+            List<Map<String, Object>> list = (List<Map<String, Object>>) CommandesListJson.get("root");
+            System.out.println("Global List " + list);
+            for (Map<String, Object> obj : list) {
+                Detail_Commande c = new Detail_Commande();
+                float id = Float.parseFloat(obj.get("id").toString());
+                System.out.println("id variable == " + id);
+               c.setQuantite((int) Float.parseFloat(obj.get("quantite").toString()));
+                c.setPrix_total( Float.parseFloat(obj.get("prix_total").toString()));
+                // add more according to the GSON response
+                c.setId((int) id);
+                c.setEtat(obj.get("etat").toString());
+                // setting the Produit id , and Produit Nom
+                 Map<String, Object> produitJson = (Map<String, Object>) obj.get("produit");
+    float produitId = Float.parseFloat(produitJson.get("id").toString());
+    String produitNom = produitJson.get("nom").toString();
+    Produit produit = new Produit((int)produitId, produitNom);
+    c.setProduit(produit);
+    
+         Map<String, Object> commandeJson = (Map<String, Object>) obj.get("commande");
+    float commandeId = Float.parseFloat(commandeJson.get("id").toString());
+    String commandeetat = commandeJson.get("etat").toString();
+    Commande commande = new Commande((int)commandeId, commandeetat);
+    c.setCommande(commande);
+                
+                
+                DetailCommandes.add(c);
+            }
+
+        } catch (Exception e) {
+    e.printStackTrace();
+        }
+        return DetailCommandes;
+
+    }
     
     
     public Commande getidCommande(String jsontext) {
@@ -124,7 +166,9 @@ public class Service_Commande {
 
     public ArrayList<Commande> getAllCommande() {
 
-        String url = Statics.URL_COMMUN + "gson/commande/historique";
+        // get Connected Client ID
+        String client="1";
+        String url = Statics.URL_COMMUN + "gson/commande/historique?client="+client;
 
         req.setUrl(url);
         req.setPost(false);
@@ -140,6 +184,27 @@ public class Service_Commande {
         NetworkManager.getInstance().addToQueueAndWait(req);
         System.out.println("Retunring COmmandes +++++" + Commandes);
         return Commandes;
+    }
+    
+     public ArrayList<Detail_Commande> getConnectedStoresCommande() {
+
+         String store="6";
+        String url = Statics.URL_COMMUN + "gson/historique/DetailCommande/Store?store="+store;
+
+        req.setUrl(url);
+        req.setPost(false);
+
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                System.out.println("Listening Correct");
+                DetailCommandes= getlistDetailscommandes(new String(req.getResponseData()));
+                req.removeResponseListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+        System.out.println("Retunring COmmandes +++++" + Commandes);
+        return DetailCommandes;
     }
 
     
@@ -196,7 +261,29 @@ public class Service_Commande {
     
     }
     
+     public boolean UpdateDetail_Commande(Detail_Commande detail){
+        final boolean[] returnboolean={false};
+        String etatcommande = detail.getEtat();
+        String iddetail = String.valueOf(detail.getId());
     
+        String url = Statics.URL_COMMUN+ "gson/update/DetailCommande/Store?detail="+iddetail+"&etat="+etatcommande;
+        System.out.println(url);
+        //ConnectionRequest.setCertificateValidation(false);
+
+        req.setUrl(url);
+        req.setPost(false);
+        req.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+             returnboolean[0]=(evt.getResponseCode() == 200); //Code HTTP 200 OK
+                req.removeResponseListener(this);
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(req);
+ 
+        
+    return returnboolean[0];
+    }
  public Container commandeinsideContainer(Commande c) {
     Container CommandeContainer = new Container(new BorderLayout());
     CommandeContainer.getAllStyles().setBorder(Border.createLineBorder(2, 0x000000));
@@ -242,11 +329,91 @@ public class Service_Commande {
 
     return CommandeContainer;
 }
+ 
+ 
+ 
+ public Container DetailcommandeinsideContainer(Detail_Commande c) {
+    Container CommandeContainer = new Container(new BorderLayout());
+    CommandeContainer.getAllStyles().setBorder(Border.createLineBorder(2, 0x000000));
+    CommandeContainer.getAllStyles().setMarginUnit(Style.UNIT_TYPE_DIPS);
+    CommandeContainer.getAllStyles().setMarginBottom(3);
+    CommandeContainer.getAllStyles().setBgColor(0xFAE1B2);
+
+    Container SecondContainer = new Container(BoxLayout.y());
+    // First Line in Container
+    Container idetatContainer = new Container(BoxLayout.x());
+    idetatContainer.getAllStyles().setFont(Font.createSystemFont(Font.FACE_MONOSPACE, Font.STYLE_BOLD, 14));
+    idetatContainer.add(new Label("Id :"));
+    idetatContainer.add(new Label(String.valueOf(c.getId())));
+    
+    
+        Container idetatContainer2 = new Container(BoxLayout.x());
+idetatContainer2.add(new Label(" Etat :"));
+Label etatlabel=new Label(c.getEtat());
+    idetatContainer2.add(etatlabel);
+    
+    Container assemble=new Container(BoxLayout.y());
+
+    // Second Line in Container
+    Container quantiteContainer = new Container(BoxLayout.y());
+    quantiteContainer.add(new Label("quantite : "));
+    quantiteContainer.add(new Label(String.valueOf(c.getQuantite())));
+
+    assemble.addAll(idetatContainer,idetatContainer2);
+    SecondContainer.add(assemble);
+    SecondContainer.add(quantiteContainer);
+
+    Container IdProduitContainer = new Container(BoxLayout.x());
+    IdProduitContainer.add(new Label("Id Produit : "+c.getProduit().getId()));
+    Container produitContainer = new Container(BoxLayout.x());
+    produitContainer.add(new Label("produit : " + c.getProduit().getNom()));
+    
+    SecondContainer.addAll(IdProduitContainer,produitContainer);
+        Container combobutton=new Container(BoxLayout.y());
+
+    if (!c.getEtat().equals("Canceled") && !c.getEtat().equals("Completed")) {
+     ComboBox<String> etatComboBox = new ComboBox<>("Pending", "Progress", "Completed");
+
+    Button btn = new Button("Update Etat");
+    btn.getAllStyles().setBgColor(0xFAA276);
+    btn.getAllStyles().setFont(Font.createSystemFont(Font.FACE_MONOSPACE, Font.STYLE_BOLD, 14));
+    btn.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent evt) {
+
+            c.setEtat(etatComboBox.getSelectedItem());
+                 if (UpdateDetail_Commande(c))
+                 {
+                     etatlabel.setText(c.getEtat());
+                     if (c.getEtat().equals("Completed"))
+                     {
+                                              combobutton.removeAll();
+
+                     }
+                 }
+
+        }
+    });
+  
+    etatComboBox.setSelectedItem(c.getEtat());
+
+    combobutton.addAll(etatComboBox,btn);
+    }  
+    CommandeContainer.add(BorderLayout.EAST,combobutton);
+    
+  
+            CommandeContainer.add(BorderLayout.CENTER,SecondContainer);
+
+
+
+    return CommandeContainer;
+}
 
 
 
 private void actionButtonClicked(int commandId) {
     // do something with the commandId
 }
+
 
 }

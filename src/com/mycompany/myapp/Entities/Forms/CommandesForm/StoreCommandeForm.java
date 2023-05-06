@@ -12,6 +12,7 @@ import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.util.Resources;
 import com.mycompany.myapp.Entities.Commande;
+import com.mycompany.myapp.Entities.Detail_Commande;
 import com.mycompany.myapp.Entities.User;
 import com.mycompany.myapp.Service.Service_Commande;
 import java.util.ArrayList;
@@ -20,30 +21,30 @@ import java.util.ArrayList;
  *
  * @author Jmili
  */
-public class CommandeForm extends BaseForm {
+public class StoreCommandeForm extends BaseForm {
 
     Container container=new Container(BoxLayout.y());
-    public CommandeForm(Resources res) {
-        super("Commande", new FlowLayout());
+    public StoreCommandeForm(Resources res) {
+        super("Store Commandes", new FlowLayout());
         Toolbar tb = new Toolbar(false);
         setToolbar(tb);
                 tb.setUIID("Toolbar");
         getTitleArea().setUIID("Toolbar");
-        setTitle("Listes des Commandes");
+        setTitle("Listes des Store Commandes");
         getContentPane().setScrollVisible(false);
         
         super.addSideMenu(res);
         
    
-        ArrayList<Commande> Commandes=Service_Commande.getInstance().getAllCommande();
-        System.out.println(" this is the list of commandands "+Commandes);
-        for (Commande c:Commandes)
+        ArrayList<Detail_Commande> Commandes=Service_Commande.getInstance().getConnectedStoresCommande();
+        System.out.println(" this is the list of Detail inside code name one commandands "+Commandes);
+        for (Detail_Commande c:Commandes)
         {
-            System.out.println("this is a asingle commandes "+c);
+            System.out.println("this is a asingle Detail commandes "+c);
            // addElement(c);
            Container CommandeContainer=new Container();
            try{
-            CommandeContainer=Service_Commande.getInstance().commandeinsideContainer(c);
+            CommandeContainer=Service_Commande.getInstance().DetailcommandeinsideContainer(c);
            // Full COmmande
               
 } catch (Exception e) {

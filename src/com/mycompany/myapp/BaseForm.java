@@ -14,6 +14,7 @@ import com.codename1.ui.layouts.Layout;
 import com.codename1.ui.plaf.Style;
 import com.codename1.ui.util.Resources;
 import com.mycompany.myapp.Entities.Forms.CommandesForm.PanierForm;
+import com.mycompany.myapp.Entities.Forms.CommandesForm.StoreCommandeForm;
 
 
 public class BaseForm extends Form {
@@ -65,7 +66,9 @@ public class BaseForm extends Form {
          tb.addMaterialCommandToSideMenu("Commande", FontImage.MATERIAL_PAYMENTS, e->new CommandeForm(res).show());
                   tb.addMaterialCommandToSideMenu("Commande", FontImage.MATERIAL_EVENT, e->new EvenementForm(res).show());
          tb.addMaterialCommandToSideMenu("Panier", FontImage.MATERIAL_PAYMENTS, e->new PanierForm(res).show());
+                  tb.addMaterialCommandToSideMenu("ConnectedStoreCommandes", FontImage.MATERIAL_EVENT, e->new StoreCommandeForm(res).show());
 
+                  
          tb.addMaterialCommandToSideMenu("logout", FontImage.MATERIAL_LOGOUT, e->new SignInForm(res).show());
 // tb.addMaterialCommandToSideMenu("Produits", FontImage.MATERIAL_LIST, e->{ShowProduits();});
 // tb.addMaterialCommandToSideMenu("Website", FontImage.MATERIAL_WEB, e->{ShowWebsite();});

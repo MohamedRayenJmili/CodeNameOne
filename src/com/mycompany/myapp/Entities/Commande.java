@@ -25,6 +25,11 @@ public class Commande {
         this.id = id;
     }
 
+    public Commande(int id, String etat) {
+        this.id = id;
+        this.etat = etat;
+    }
+
     public Commande(User user, String destination, float prix, String etat) {
         this.user = user;
         this.destination = destination;

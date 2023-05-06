@@ -3,6 +3,20 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1"/>
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/Plop/Desktop/CodeNameOne%20Project/CodeNameOne/src/com/mycompany/myapp/CommandeForm.java</file>
+            <file>file:/C:/Users/Plop/Desktop/CodeNameOne%20Project/CodeNameOne/src/com/mycompany/myapp/Service/Service_Panier.java</file>
+            <file>file:/C:/Users/Plop/Desktop/CodeNameOne%20Project/CodeNameOne/src/com/mycompany/myapp/BaseForm.java</file>
+            <file>file:/C:/Users/Plop/Desktop/CodeNameOne%20Project/CodeNameOne/src/com/mycompany/myapp/Entities/Forms/CommandesForm/CommandeForm.java</file>
+            <file>file:/C:/Users/Plop/Desktop/CodeNameOne%20Project/CodeNameOne/src/com/mycompany/myapp/Entities/Forms/CommandesForm/PanierForm.java</file>
+            <file>file:/C:/Users/Plop/Desktop/CodeNameOne%20Project/CodeNameOne/src/com/mycompany/myapp/Entities/Commande.java</file>
+            <file>file:/C:/Users/Plop/Desktop/CodeNameOne%20Project/CodeNameOne/src/com/mycompany/myapp/Service/Service_Commande.java</file>
+            <file>file:/C:/Users/Plop/Desktop/CodeNameOne%20Project/CodeNameOne/src/com/mycompany/myapp/Entities/Evenement_entite.java</file>
+            <file>jar:file:/C:/Users/Plop/Desktop/CodeNameOne%20Project/CodeNameOne/lib/CodenameOne_SRC.zip!/com/codename1/ui/util/Resources.java</file>
+            <file>file:/C:/Users/Plop/Desktop/CodeNameOne%20Project/CodeNameOne/src/com/mycompany/myapp/Entities/StaticPanier.java</file>
+            <file>file:/C:/Users/Plop/Desktop/CodeNameOne%20Project/CodeNameOne/src/com/mycompany/myapp/Entities/Forms/CommandesForm/PaymentForm.java</file>
+            <file>file:/C:/Users/Plop/Desktop/CodeNameOne%20Project/CodeNameOne/src/com/mycompany/myapp/Service/PaymentProcessor.java</file>
+            <file>file:/C:/Users/Plop/Desktop/CodeNameOne%20Project/CodeNameOne/src/com/mycompany/myapp/ListStoresForm.java</file>
+        </group>
     </open-files>
 </project-private>

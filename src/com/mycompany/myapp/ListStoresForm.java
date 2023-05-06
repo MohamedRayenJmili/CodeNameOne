@@ -37,7 +37,6 @@ public class ListStoresForm extends BaseForm {
         getTitleArea().setUIID("Toolbar");
         setTitle("Liste des Stores");
         getContentPane().setScrollVisible(false);
-        setUIID("ListStore");
         super.addSideMenu(res);
         tb.addSearchCommand(e -> {});
         

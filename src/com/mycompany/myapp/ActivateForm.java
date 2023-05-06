@@ -20,7 +20,7 @@ public class ActivateForm extends BaseForm {
 
     public ActivateForm(Resources res) {
         super(new BorderLayout());
-        Toolbar tb = new Toolbar(true);
+        Toolbar tb = new Toolbar(false);
         setToolbar(tb);
         tb.setUIID("Toolbar");
         getTitleArea().setUIID("Container");
