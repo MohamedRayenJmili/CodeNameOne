@@ -1,39 +1,49 @@
 package com.storeship.Reclamation;
 
+import com.codename1.io.FileSystemStorage;
+import com.codename1.io.Util;
 import com.codename1.ui.Button;
 import com.codename1.ui.ButtonGroup;
 import com.codename1.ui.Component;
 import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
+import com.codename1.ui.EncodedImage;
 import com.codename1.ui.Form;
+import com.codename1.ui.Image;
 import com.codename1.ui.Label;
 import com.codename1.ui.RadioButton;
 import com.codename1.ui.TextField;
+import com.codename1.ui.URLImage;
 import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BorderLayout;
+import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.layouts.GridLayout;
 import com.storeship.entities.Reclamation;
 import com.storeship.entities.TypeReclamation;
 import com.storeship.services.ServiceReclamation;
 import com.storeship.services.TypeReclamationService;
+import com.storeship.services.uploadImageToCloudinary;
+import java.io.IOException;
 
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Random;
 
 public class AddReclamation extends Form {
     private ArrayList<TypeReclamation> types;
 String image;
+String imageFilePath = ""; // Variable to store the selected image file path
 
 
     public AddReclamation() {
         super("Add Reclamation", new BorderLayout());
 
         // Create a container for the input components
-        Container inputContainer = new Container(new GridLayout(3, 1));
+        Container inputContainer = new Container(BoxLayout.y());
 
         // Create a text field with a placeholder
         TextField textField = new TextField("", "Saisir vote description");
@@ -67,14 +77,32 @@ addImageButton.addActionListener(e -> {
         if (ev != null && ev.getSource() != null) {
             // Get the selected file path
             String filePath = (String) ev.getSource();
-            String fileName = filePath.substring(filePath.lastIndexOf("/") + 1);
+            imageFilePath = filePath;
+            
+            // Copy the selected image file to the resource directory
+            try {
+                String fileName = FileSystemStorage.getInstance().getAppHomePath() + "selected_image"+filePath.substring(filePath.lastIndexOf("/")+1)+".jpg";
+                Util.copy(FileSystemStorage.getInstance().openInputStream(filePath), FileSystemStorage.getInstance().openOutputStream(fileName));
+              
+                // Create EncodedImage from the copied file path
+                EncodedImage encodedImage = EncodedImage.create("selected_image"+filePath.substring(filePath.lastIndexOf("/")+1)+".jpg");
+                
+                // Use the encodedImage in your application as needed
+                
+                // For example, you can create a new Image component and add it to the container:
+                Image image = encodedImage.scaled(getWidth(), getHeight());
+                Label imageLabel=new Label();
 
-            image=fileName;
-            // Store the file path in the Reclamation object
-           // Reclamation.setImagePath(filePath);
+                imageLabel = new Label(image);
+                inputContainer.add(imageLabel);
+                inputContainer.revalidate();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
         }
     }, Display.GALLERY_IMAGE);
 });
+
 inputContainer.add(addImageButton);
 
         // Add an action listener to the submit button

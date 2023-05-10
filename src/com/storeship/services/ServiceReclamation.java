@@ -40,6 +40,7 @@ public class ServiceReclamation {
 
     public boolean addReclamation(Reclamation r) {
         String url = Statics.BASE_URL + "/Json/add_reclamation/" + r.getIdUser() + "/" + r.getIdCommande() + "/" + r.getEtat() + "/" + r.getDate() + "/" + r.getImage()+ "/" + r.getContenu() + "/" + r.getIdProduit() + "/" + r.getIdAdmin() + "/" + r.getType().getId();
+        System.out.println("url====" + url );
         req.setUrl(url);
         req.setPost(false);
         req.addResponseListener(new ActionListener<NetworkEvent>() {

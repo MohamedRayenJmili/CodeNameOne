@@ -11,24 +11,25 @@ import com.codename1.ui.Component;
 import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
-import com.codename1.ui.FontImage;
+import com.codename1.ui.EncodedImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.Label;
 import com.codename1.ui.Toolbar;
+import com.codename1.ui.URLImage;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
-import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.plaf.UIManager;
-import com.codename1.ui.util.Resources;
 import com.storeship.entities.Produit;
 import com.storeship.gui.BaseForm;
 import com.storeship.services.ProduitService;
 import com.codename1.ui.util.Resources;
 import com.storeship.entities.StaticPanier;
 import com.storeship.gui.SessionManager;
+import com.codename1.ui.Image;
+import com.codename1.ui.layouts.FlowLayout;
+import com.pidevv.MyApplication;
 
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 /**
@@ -44,14 +45,17 @@ public class AfficherProduit extends BaseForm{
 
 
     public AfficherProduit() {
-        super("Liste Produit", BoxLayout.y());
+     super("Panier", new FlowLayout());
+      
         Toolbar tb = new Toolbar(false);
         setToolbar(tb);
                 tb.setUIID("Toolbar");
         getTitleArea().setUIID("Toolbar");
-        Form previous = Display.getInstance().getCurrent();
-        tb.setBackCommand("", e -> previous.showBack());
-        setTitle("Liste Produit");
+        setTitle("Panier Courrant");
+        getContentPane().setScrollVisible(false);
+          Resources res =MyApplication.getTheme();
+        setTitle("List Reservations");
+        super.addSideMenu(res);
         addGUIs();
         addActions();
 
@@ -97,7 +101,7 @@ public class AfficherProduit extends BaseForm{
 
     private Container makeModelWithoutButtons(Produit produit) {
         Container produitModel = new Container(new BoxLayout(BoxLayout.Y_AXIS));
-        produitModel.setUIID("containerRounded");
+        //produitModel.setUIID("containerRounded");
 
 
       
@@ -114,13 +118,35 @@ public class AfficherProduit extends BaseForm{
          sujetLabe4 = new Label("etat : " + produit.getEtat());
         sujetLabe4.setUIID("labelDefault");
         
-
+        //aaaaaaa
+  Container imageContainer = new Container(new BoxLayout(BoxLayout.Y_AXIS));
+            String imageUrl = produit.getPhoto();
+            System.out.println(
+            
+            
+            
+            
+            
+            );
+            if (imageUrl != null && !imageUrl.isEmpty()) {
+                String fullImageUrl = "http://127.0.0.1:8000/uploads/user/images/" + imageUrl;
+                System.out.println("Full IMAGE URL CALLER "+ fullImageUrl);
+                try {
+                    EncodedImage placeholder = EncodedImage.createFromImage(Image.createImage(350, 550), true);
+                    URLImage urlImage = URLImage.createToStorage(placeholder, "rimage_" + imageUrl, fullImageUrl, URLImage.RESIZE_SCALE);
+                    Label photoEvent = new Label(urlImage);
+                    imageContainer.add(photoEvent);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            //veloContainer.add(BorderLayout.WEST, imageContainer);
 
 
 
         produitModel.addAll(
 
-             sujetLabel,sujetLabe2 , sujetLabe3, sujetLabe4 
+             sujetLabel,sujetLabe2 , sujetLabe3, sujetLabe4 ,imageContainer
         );
 
         return produitModel;

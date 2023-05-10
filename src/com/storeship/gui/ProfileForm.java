@@ -87,20 +87,20 @@ public class ProfileForm extends BaseForm {
         ));
             
         } catch (Exception e) {
-            add(LayeredLayout.encloseIn(
-                sl,
-                BorderLayout.south(
-                    GridLayout.encloseIn(3, 
-                            facebook,
-                            FlowLayout.encloseCenter(
-                                new Label(res.getImage("profile.jpg"), "PictureWhiteBackgrond")),
-                            twitter
-                    )
-                )
-        ));
+           
         }
         
-        
+        // add(LayeredLayout.encloseIn(
+//                sl,
+//                BorderLayout.south(
+//                    GridLayout.encloseIn(3, 
+//                            facebook,
+//                            FlowLayout.encloseCenter(
+//                                new Label(res.getImage("profile.jpg"), "PictureWhiteBackgrond")),
+//                            twitter
+//                    )
+//                )
+//        ));
 
         TextField nom = new TextField(SessionManager.getUser().getNom());
         nom.setUIID("TextFieldBlack");

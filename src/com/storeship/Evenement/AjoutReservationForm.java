@@ -12,6 +12,7 @@ import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.TextField;
 import com.codename1.ui.layouts.BoxLayout;
+import com.pidevv.MyApplication;
 import com.storeship.entities.Evenement_entite;
 import com.storeship.entities.Reservation_entite;
 import com.storeship.services.ServiceReservation;
@@ -58,8 +59,8 @@ SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 String formattedDate = formatter.format(currentDate);
 
 // Create the Reservation object with the formatted date and the nbPlaces from the TextField
-Reservation_entite a = new Reservation_entite(Integer.parseInt(nom.getText()));
-                    System.out.println(Integer.parseInt(nom.getText()));
+Reservation_entite a = new Reservation_entite();
+a.setNbr_place(Integer.parseInt(nom.getText()));
 a.setEv(evenement);
                   
                     System.out.println("data  Commande == "+a);
@@ -71,7 +72,7 @@ a.setEv(evenement);
                     iDialog.dispose(); //na7io loading ba3d ma3mlna ajout
                     
                     //ba3d ajout net3adaw lel ListCommandeForm
-                    new ListReservationForm(previous).show();
+                    new ListReservationForm().show();
                     
                     
                     refreshTheme();//Actualisation

@@ -11,11 +11,16 @@ import com.codename1.ui.Dialog;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.Label;
+import com.codename1.ui.Toolbar;
+import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.plaf.Style;
 import com.codename1.ui.table.DefaultTableModel;
 import com.codename1.ui.table.Table;
 import com.codename1.ui.table.TableModel;
+import com.codename1.ui.util.Resources;
+import com.pidevv.MyApplication;
 import com.storeship.entities.Reservation_entite;
+import com.storeship.gui.BaseForm;
 import com.storeship.services.ServiceReservation;
 
 import java.util.ArrayList;
@@ -24,13 +29,23 @@ import java.util.ArrayList;
  *
  * @author bhk
  */
-public class ListReservationForm extends Form {
+public class ListReservationForm extends BaseForm {
 
-    public ListReservationForm(Form previous) {
+    public ListReservationForm() {
+        
+         super("Panier", new FlowLayout());
+      
+        Toolbar tb = new Toolbar(false);
+        setToolbar(tb);
+                tb.setUIID("Toolbar");
+        getTitleArea().setUIID("Toolbar");
+        setTitle("Panier Courrant");
+        getContentPane().setScrollVisible(false);
+          Resources res =MyApplication.getTheme();
         setTitle("List Reservations");
-                getToolbar().addMaterialCommandToLeftBar("", FontImage.MATERIAL_ARROW_BACK, e-> previous.showBack());
+        super.addSideMenu(res);
 
-           ArrayList<Reservation_entite>list = ServiceReservation.getInstance().affichageReservation();
+           ArrayList<Reservation_entite>list = ServiceReservation.getInstance().UserReservation();
            for(Reservation_entite a:list){
                TableModel model=new DefaultTableModel(new String[] {"nbPlaces","date"},new Object[][]{
                    {a.getNbr_place(),a.getDate()}
@@ -67,7 +82,7 @@ public class ListReservationForm extends Form {
                  }
                 //n3ayto l suuprimer men service Reclamation
                 if(ServiceReservation.getInstance().deleteReservation(a.getId_reservation())) {
-                    new ListReservationForm(previous).show();
+                    new ListReservationForm().show();
                 }
            
         });
@@ -88,7 +103,7 @@ public class ListReservationForm extends Form {
         
         lModifier.addPointerPressedListener(l -> {
             //System.out.println("hello update");
-            new ModifierReservationForm(a,previous).show();
+            new ModifierReservationForm(a,this).show();
         });
        
         

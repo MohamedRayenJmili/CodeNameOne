@@ -119,7 +119,8 @@ for (Map.Entry<Produit, Integer> entry : panierCourant.entrySet()){
     System.out.println("Added ++++"+entry);
 }
         StaticPanier.getInstance().clear();
-        
+                      Dialog.show("Payment Success", "Thank you for your purchase", "OK", null);
+               new  CommandeForm(res).show();
         }  else {
            Dialog.show("Payment Failure", "Your Payment Process Has Failed", "OK", null);
 

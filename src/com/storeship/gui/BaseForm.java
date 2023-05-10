@@ -35,7 +35,9 @@ import com.storeship.Commande.CommandeForm;
 import com.storeship.Commande.PanierForm;
 import com.storeship.Commande.StoreCommandeForm;
 import com.storeship.Evenement.ListEvenementForm;
+import com.storeship.Evenement.ListReservationForm;
 import com.storeship.Produit.AfficherProduit;
+import com.storeship.Reclamation.AddReclamation;
 import com.storeship.Reclamation.ReclamationStat;
 import com.storeship.Store.DetaileStoreForm;
 import com.storeship.Store.ListStoresForm;
@@ -101,6 +103,8 @@ public class BaseForm extends Form {
             tb.addMaterialCommandToSideMenu("Liste Store", FontImage.MATERIAL_EXIT_TO_APP, e -> new ListStoresForm(res).show());
             tb.addMaterialCommandToSideMenu("Liste Produit", FontImage.MATERIAL_EXIT_TO_APP, e -> new AfficherProduit().show());
             tb.addMaterialCommandToSideMenu("Reclamation Stats", FontImage.MATERIAL_EXIT_TO_APP, e -> new ReclamationStat().show());
+            tb.addMaterialCommandToSideMenu("Add Reclamation", FontImage.MATERIAL_EXIT_TO_APP, e -> new AddReclamation().show());
+            tb.addMaterialCommandToSideMenu("Liste Reservation", FontImage.MATERIAL_EXIT_TO_APP, e -> new ListReservationForm().show());
 
         } else if (SessionManager.getUser().getRoles().equals("ROLE_PARTNER")) {
             try {

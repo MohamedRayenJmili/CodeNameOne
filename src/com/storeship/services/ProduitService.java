@@ -87,13 +87,13 @@ public class ProduitService {
                         (int) Float.parseFloat(obj.get("etat").toString()),
                         (String) obj.get("nom"),
                         (float) Float.parseFloat(obj.get("prix").toString())
-                       
+                         
                        
                         
                      
 
                 );
-
+                   produit.setPhoto(obj.get("photo").toString());
                 listProduit.add(produit);
             }
         } catch (IOException e) {

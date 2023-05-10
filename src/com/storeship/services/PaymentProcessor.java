@@ -8,8 +8,6 @@ package com.storeship.services;
  *
  * @author Plop
  */
-
-
 import com.google.gson.*;
 import com.storeship.entities.Commande;
 import com.stripe.Stripe;
@@ -24,18 +22,18 @@ import java.util.List;
 import java.util.Map;
 
 //import javaapplication1.GUI.Controllers.HolderpageController;
-
 public class PaymentProcessor {
-    
+
     private static final String STRIPE_SECRET_KEY = "sk_test_51Mf0S6FwJ7wXIwXewSc2z6FyXoFWAJZFy0Iuk4OZxzTVzLENEvBnnqug21baEIiV0MEDXTYl0y4Ajnp2LDWRZtC300mrwZe2j2";
-    public Commande processPayment(String cardNumber, String expirationMonth, String expirationYear, String cvc,Commande commande) {
-            boolean paymentstatus=false;
-            String chargeId="";
+
+    public Commande processPayment(String cardNumber, String expirationMonth, String expirationYear, String cvc, Commande commande) {
+        boolean paymentstatus = false;
+        String chargeId = "";
         try {
             // Set the API key
             Stripe.apiKey = STRIPE_SECRET_KEY;
             // Create a charge
-         /*   HashMap<String, Object> cardParams = new HashMap<String, Object>();
+            /*   HashMap<String, Object> cardParams = new HashMap<String, Object>();
             cardParams.put("object", "card");
             cardParams.put("number", cardNumber);
             cardParams.put("exp_month", expirationMonth);
@@ -47,122 +45,76 @@ public class PaymentProcessor {
                 chargeParams.put("currency", "eur");
                 chargeParams.put("description","My First Test Charge (created for API docs at https://www.stripe.com/docs/api)");
                 chargeParams.put("source", cardParams);
-        */
-         Map<String, Object> customerParams = new HashMap<String, Object>();
+             */
+            Map<String, Object> customerParams = new HashMap<String, Object>();
             // integre melek
             //customerParams.put("email", commande.getUser().getEmail());
-                      customerParams.put("email", "User1@gmail.com");
+            customerParams.put("email", "User1@gmail.com");
 
             Customer payer = Customer.create(customerParams);
 
-           
-
             Map<String, Object> retrieveParams = new HashMap<String, Object>();
-            
-            
-            
 
-                           List<String> expandList = new ArrayList<String>();
+            List<String> expandList = new ArrayList<String>();
 
-                           expandList.add("sources");
+            expandList.add("sources");
 
-                           retrieveParams.put("expand", expandList);
+            retrieveParams.put("expand", expandList);
 
-                           Customer customer = Customer.retrieve(payer.getId(), retrieveParams, null); //add customer id here : it will start with cus_
+            Customer customer = Customer.retrieve(payer.getId(), retrieveParams, null); //add customer id here : it will start with cus_
 
-                          
-
-                         
             HashMap<String, Object> cardParam = new HashMap<String, Object>();
             cardParam.put("number", cardNumber);
             cardParam.put("exp_month", expirationMonth);
             cardParam.put("exp_year", expirationYear);
             cardParam.put("cvc", cvc);
- 
 
-                           Map<String, Object> tokenParam = new HashMap<String, Object>();
+            Map<String, Object> tokenParam = new HashMap<String, Object>();
 
-                           tokenParam.put("card", cardParam);
+            tokenParam.put("card", cardParam);
 
- 
+            Token token = Token.create(tokenParam); // create a token
 
-                           Token token = Token.create(tokenParam); // create a token
+            Map<String, Object> source = new HashMap<String, Object>();
 
- 
+            source.put("source", token.getId()); //add token as source
 
-                           Map<String, Object> source = new HashMap<String, Object>();
+            Card card = (Card) customer.getSources().create(source); // add the customer details to which card is need to link
 
-                           source.put("source", token.getId()); //add token as source
+            String cardDetails = card.toJson();
 
- 
+            System.out.println("Card Details : " + cardDetails);
 
-                           Card card = (Card)customer.getSources().create(source); // add the customer details to which card is need to link
+            customer = Customer.retrieve(payer.getId());//change the customer id or use to get customer by id.
 
-                           String cardDetails = card.toJson();
-
-                           System.out.println("Card Details : " + cardDetails);
-
-                           customer = Customer.retrieve(payer.getId());//change the customer id or use to get customer by id.
-
-                           System.out.println("After adding card, customer details : " + customer);
-
-               
-
-                
-
-                
+            System.out.println("After adding card, customer details : " + customer);
 
 //                PaymentMethod paymentMethod = PaymentMethod.create(cardParam);
+            System.out.println(customer.getId());
 
-               
+            //Use the payment method to make a charge
+            Map<String, Object> chargeParams = new HashMap<String, Object>();
+            int amount = (int) commande.getPrix() * 100;
+            chargeParams.put("amount", amount);
 
-                
+            chargeParams.put("currency", "eur");
 
-                
+            //chargeParams.put("description", "Example charge");
+            //chargeParams.put("source", token.getId());
+            chargeParams.put("customer", customer.getId());
 
-                
+            Charge charge = Charge.create(chargeParams);
 
-                
-
-                
-
-                
-
-                
-
-            System.out.println(customer.getId());      
-
- //Use the payment method to make a charge
-
-    Map<String, Object> chargeParams = new HashMap<String, Object>();
-    int amount=(int)commande.getPrix()*100;
-    chargeParams.put("amount", amount);
-    
-    chargeParams.put("currency", "eur");
-
-    //chargeParams.put("description", "Example charge");
-
-     //chargeParams.put("source", token.getId());
-
-    chargeParams.put("customer", customer.getId());
-
-         Charge charge=   Charge.create(chargeParams);
-
-            
-        
-        
-            
             if (charge.getPaid()) {
-                chargeId=charge.getId();
-            } 
+                chargeId = charge.getId();
+            }
         } catch (StripeException e) {
 
-e.printStackTrace();
+            e.printStackTrace();
         }
-                        commande.setPayment(chargeId);
+        commande.setPayment(chargeId);
 
         return commande;
     }
 
 }
-

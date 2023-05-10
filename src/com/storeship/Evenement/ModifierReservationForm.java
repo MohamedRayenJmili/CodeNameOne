@@ -11,8 +11,11 @@ import com.codename1.ui.Container;
 import com.codename1.ui.Form;
 import com.codename1.ui.TextField;
 import com.codename1.ui.layouts.BoxLayout;
+import com.codename1.ui.util.Resources;
+import com.pidevv.MyApplication;
 
 import com.storeship.entities.Reservation_entite;
+import com.storeship.gui.BaseForm;
 import com.storeship.services.ServiceReservation;
 
 
@@ -20,10 +23,11 @@ import com.storeship.services.ServiceReservation;
  *
  * @author Lenovo
  */
-public class ModifierReservationForm extends Form {
+public class ModifierReservationForm extends BaseForm {
     
     Form current;
     public ModifierReservationForm(Reservation_entite r,Form previous) {
+       Resources res =MyApplication.getTheme();
         setTitle("Modifier Cours");
          TextField nb = new TextField(String.valueOf(r.getNbr_place()) , "nbPlaces" , 20 , TextField.ANY);           
         
@@ -41,12 +45,12 @@ public class ModifierReservationForm extends Form {
        //appel fonction modfier avis men service
        
        if(ServiceReservation.getInstance().modifierReservation(r)) { // if true
-           new ListReservationForm(previous).show();
+           new ListReservationForm().show();
        }
         });
        Button btnAnnuler = new Button("Annuler");
        btnAnnuler.addActionListener(e -> {
-           new ListReservationForm(previous).show();
+           new ListReservationForm().show();
        });
        
         Container content = BoxLayout.encloseY(
