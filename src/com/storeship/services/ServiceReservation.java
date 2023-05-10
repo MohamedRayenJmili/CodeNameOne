@@ -224,7 +224,7 @@ public class ServiceReservation{
     
     //Delete 
     public boolean deleteReservation (int id ) {
-        String url = Statics.BASE_URL +"DeleteReservationJSON/"+id;
+        String url = Statics.BASE_URL +"/DeleteReservationJSON/"+id;
         
         req.setUrl(url);
         
@@ -244,7 +244,7 @@ public class ServiceReservation{
     
     //Update 
     public boolean modifierReservation (Reservation_entite  t) {
-        String url = Statics.BASE_URL +"UpdateReservationJSON/"+t.getId_reservation()+"?&nbPlaces="+t.getNbr_place();
+        String url = Statics.BASE_URL +"/UpdateReservationJSON/"+t.getId_reservation()+"?&nbPlaces="+t.getNbr_place();
         req.setUrl(url);
         
         req.addResponseListener(new ActionListener<NetworkEvent>() {

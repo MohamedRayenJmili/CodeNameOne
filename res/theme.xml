@@ -2,14 +2,66 @@
 
 <resource majorVersion="1" minorVersion="11" useXmlUI="false">
     <image name="activation-background.jpg"  />
+    <image name="back-command.png" type="multi"  />
     <image name="back-logo.jpeg"  />
     <image name="back.png"  />
     <image name="background.png"  />
+    <image name="border.png"  />
+    <image name="Button.borderBottom_1.png" type="multi"  />
+    <image name="Button.borderBottomL_1.png" type="multi"  />
+    <image name="Button.borderBottomR_1.png" type="multi"  />
+    <image name="Button.borderCenter_1.png" type="multi"  />
+    <image name="Button.borderLeft_1.png" type="multi"  />
+    <image name="Button.borderRight_1.png" type="multi"  />
+    <image name="Button.borderTop_1.png" type="multi"  />
+    <image name="Button.borderTopL_1.png" type="multi"  />
+    <image name="Button.borderTopR_1.png" type="multi"  />
+    <image name="cal_left_arrow.png" type="multi"  />
+    <image name="cal_right_arrow.png" type="multi"  />
+    <image name="chbox1.png" type="multi"  />
+    <image name="chboxv1.png" type="multi"  />
+    <image name="ComboBox.borderBottom_1.png" type="multi"  />
+    <image name="ComboBox.borderBottomL_1.png" type="multi"  />
+    <image name="ComboBox.borderBottomR_1.png" type="multi"  />
+    <image name="ComboBox.borderCenter_1.png" type="multi"  />
+    <image name="ComboBox.borderLeft_1.png" type="multi"  />
+    <image name="ComboBox.borderRight_1.png" type="multi"  />
+    <image name="ComboBox.borderTop_1.png" type="multi"  />
+    <image name="ComboBox.borderTopL_1.png" type="multi"  />
+    <image name="ComboBox.borderTopR_1.png" type="multi"  />
+    <image name="ComboBox.sel#borderBottom_2.png" type="multi"  />
+    <image name="ComboBox.sel#borderBottomL_2.png" type="multi"  />
+    <image name="ComboBox.sel#borderBottomR_2.png" type="multi"  />
+    <image name="ComboBox.sel#borderCenter_2.png" type="multi"  />
+    <image name="ComboBox.sel#borderLeft_2.png" type="multi"  />
+    <image name="ComboBox.sel#borderRight_2.png" type="multi"  />
+    <image name="ComboBox.sel#borderTop_2.png" type="multi"  />
+    <image name="ComboBox.sel#borderTopL_2.png" type="multi"  />
+    <image name="ComboBox.sel#borderTopR_2.png" type="multi"  />
     <image name="confirmation-background.jpg"  />
+    <image name="Dialog.borderBottom_1.png" type="multi"  />
+    <image name="Dialog.borderBottomL_1.png" type="multi"  />
+    <image name="Dialog.borderBottomR_1.png" type="multi"  />
+    <image name="Dialog.borderCenter_1.png" type="multi"  />
+    <image name="Dialog.borderLeft_1.png" type="multi"  />
+    <image name="Dialog.borderRight_1.png" type="multi"  />
+    <image name="Dialog.borderTop_1.png" type="multi"  />
+    <image name="Dialog.borderTopL_1.png" type="multi"  />
+    <image name="Dialog.borderTopR_1.png" type="multi"  />
     <image name="dog.jpg"  />
     <image name="facebook-logo.png" type="multi"  />
     <image name="Logo.png" type="multi"  />
     <image name="map-pin.jpg"  />
+    <image name="Menu.borderBottom_1.png" type="multi"  />
+    <image name="Menu.borderBottomL_1.png" type="multi"  />
+    <image name="Menu.borderBottomR_1.png" type="multi"  />
+    <image name="Menu.borderCenter_1.png" type="multi"  />
+    <image name="Menu.borderLeft_1.png" type="multi"  />
+    <image name="Menu.borderRight_1.png" type="multi"  />
+    <image name="Menu.borderTop_1.png" type="multi"  />
+    <image name="Menu.borderTopL_1.png" type="multi"  />
+    <image name="Menu.borderTopR_1.png" type="multi"  />
+    <image name="menu.png" type="multi"  />
     <image name="news-item-1.jpg"  />
     <image name="news-item-2.jpg"  />
     <image name="news-item-3.jpg"  />
@@ -17,6 +69,7 @@
     <image name="news-item.jpg"  />
     <image name="news-tab-down-arrow.png" type="multi"  />
     <image name="news-tab-down.png" type="multi"  />
+    <image name="of_menu.png" type="multi"  />
     <image name="on-off-off.png" type="multi"  />
     <image name="on-off-on.png" type="multi"  />
     <image name="oublier.png"  />
@@ -25,7 +78,16 @@
     <image name="profile.jpg" type="multi"  />
     <image name="signin-background.jpg"  />
     <image name="signup-background.jpg"  />
+    <image name="sliderEmpty.png" type="multi"  />
+    <image name="sliderEmptyLeft.png" type="multi"  />
+    <image name="sliderEmptyRight.png" type="multi"  />
+    <image name="sliderRedCenter.png" type="multi"  />
+    <image name="sliderRedLeft.png" type="multi"  />
+    <image name="sliderRedRight.png" type="multi"  />
     <image name="smily.png" type="multi"  />
+    <image name="switch_mask.png" type="multi"  />
+    <image name="switch_off.png" type="multi"  />
+    <image name="switch_on.png" type="multi"  />
     <theme name="Theme">
         <val key="@includeNativeBool" value="true" />
         <val key="@tabPlacementInt" value="0" />
@@ -46,7 +108,7 @@
         <val key="Button.align" value="4" />
         <border key="Button.border" type="round" roundBorderColor="16723285" opacity="255" strokeColor="0" strokeOpacity="255" strokeThickness="0.0" strokeMM="false" shadowSpread="10" shadowOpacity="0" shadowX="0.5" shadowY="0.5" shadowBlur="10.0" shadowMM="false" rectangle="true" />
         <val key="Button.fgColor" value="ffffff" />
-        <font key="Button.font" type="ttf" face="0" style="0" size="0" name="native:MainLight" family="native:MainLight" sizeSettings="3" actualSize="2.5" />
+        <font key="Button.font" type="ttf" face="0" style="0" size="0" name="native:MainRegular" family="native:MainRegular" sizeSettings="1" actualSize="8.0" />
         <val key="Button.marUnit" value="2,2,2,2" />
         <val key="Button.margin" value="3.0,3.0,2.0,2.0" />
         <val key="Button.padUnit" value="2,2,2,2" />
@@ -100,7 +162,7 @@
         <val key="DatePickerMonth.sel#transparency" value="0" />
         <val key="DatePickerMonth.transparency" value="0" />
         <val key="FloatingHint.align" value="4" />
-        <val key="FloatingHint.fgColor" value="a2a1b8" />
+        <val key="FloatingHint.fgColor" value="666666" />
         <font key="FloatingHint.font" type="ttf" face="0" style="0" size="0" name="native:MainLight" family="native:MainLight" sizeSettings="3" actualSize="2.5" />
         <val key="FloatingHint.transparency" value="0" />
         <val key="Form.bgColor" value="ffffff" />
@@ -109,8 +171,9 @@
         <val key="Form.transparency" value="255" />
         <val key="ImageOverlay.bgColor" value="14134b" />
         <val key="ImageOverlay.transparency" value="60" />
+        <val key="Label.align" value="4" />
         <val key="Label.fgColor" value="0" />
-        <font key="Label.font" type="ttf" face="0" style="0" size="0" name="native:MainLight" family="native:MainLight" sizeSettings="3" actualSize="2.5" />
+        <font key="Label.font" type="ttf" face="0" style="0" size="16" name="native:MainRegular" family="native:MainRegular" sizeSettings="1" actualSize="2.5" />
         <val key="Label.transparency" value="0" />
         <val key="LargeWhiteText.align" value="1" />
         <val key="LargeWhiteText.fgColor" value="ffffff" />
@@ -260,7 +323,7 @@
         <val key="TextField.align" value="4" />
         <border key="TextField.border" type="empty" />
         <val key="TextField.fgColor" value="0" />
-        <val key="TextField.margin" value="0.0,0.0,0.0,0.0" />
+        <font key="TextField.font" type="system" face="0" style="1" size="0" />
         <val key="TextField.padUnit" value="2,2,2,2" />
         <val key="TextField.padding" value="2.0,2.0,2.0,2.0" />
         <val key="TextField.sel#align" value="4" />
@@ -306,9 +369,9 @@
         <val key="TitleCommand.sel#padding" value="2.0,2.0,2.0,2.0" />
         <val key="TitleCommand.sel#transparency" value="0" />
         <val key="TitleCommand.transparency" value="0" />
-        <gradient key="Toolbar.bgGradient" color1="0" color2="0" posX="0.5" posY="0.5" radius="1.0" />
-        <val key="Toolbar.bgType" value="0" />
-        <border key="Toolbar.border" type="empty" />
+        <val key="Toolbar.bgColor" value="cc00cc" />
+        <border key="Toolbar.border" type="image" i1="activation-background.jpg" i2="activation-background.jpg" i3="activation-background.jpg" i4="activation-background.jpg" i5="activation-background.jpg" i6="activation-background.jpg" i7="activation-background.jpg" i8="activation-background.jpg" />
+        <val key="Toolbar.fgColor" value="990099" />
         <val key="Toolbar.transparency" value="0" />
         <val key="Welcome.bgImage" value="background.png" />
         <val key="Welcome.bgType" value="33" />
@@ -335,6 +398,15 @@
         <val key="transparency" value="0" />
     </theme>
     <image name="timeline-background.jpg"  />
+    <image name="TitleArea.borderBottom_1.png" type="multi"  />
+    <image name="TitleArea.borderBottomL_1.png" type="multi"  />
+    <image name="TitleArea.borderBottomR_1.png" type="multi"  />
+    <image name="TitleArea.borderCenter_1.png" type="multi"  />
+    <image name="TitleArea.borderLeft_1.png" type="multi"  />
+    <image name="TitleArea.borderRight_1.png" type="multi"  />
+    <image name="TitleArea.borderTop_1.png" type="multi"  />
+    <image name="TitleArea.borderTopL_1.png" type="multi"  />
+    <image name="TitleArea.borderTopR_1.png" type="multi"  />
     <image name="twitter-logo.png" type="multi"  />
     <image name="welcome-background.jpg"  />
     <image name="welcome-slide-1.png" type="multi"  />
