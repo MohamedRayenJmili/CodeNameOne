@@ -236,10 +236,7 @@ public Store getOneStore(int user_id) {
                 System.out.println("6");
             }
             else{
-                System.out.println("7");
-                   new NewStoreForm().show();
-                   
-                   System.out.println("8");
+              store = null;  
             }
             req.removeResponseListener(this);
         }

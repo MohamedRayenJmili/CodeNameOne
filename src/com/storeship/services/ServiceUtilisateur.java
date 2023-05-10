@@ -137,6 +137,7 @@ public class ServiceUtilisateur {
                                                 userinfo.setAdresse(String.valueOf(user.get("adresse")));
 
                         SessionManager.setUser(userinfo);
+                        
                      //   SessionManager.setEmail(email);
                     }
                 }catch(IOException | NumberFormatException ex) {

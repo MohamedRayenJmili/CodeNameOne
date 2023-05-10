@@ -17,6 +17,7 @@ import com.codename1.ui.util.Resources;
 import com.storeship.entities.Categorie_store;
 import com.storeship.entities.Store;
 import com.storeship.gui.BaseForm;
+import com.storeship.gui.SessionManager;
 import com.storeship.services.ServiceStore;
 
 
@@ -31,7 +32,7 @@ public class NewStoreForm extends BaseForm{
     private TextField photoField;
     private TextField categoryField;
     private Button saveButton;
-    public NewStoreForm() {
+    public NewStoreForm(Resources res) {
         
                 super("New Store", new FlowLayout());
         Toolbar tb = new Toolbar(false);
@@ -90,7 +91,8 @@ public class NewStoreForm extends BaseForm{
             store.setCategorie(new Categorie_store(category));
             ServiceStore.getInstance().addStore(store);
             // Save the store entity or perform any other desired operations
-            
+            if (ServiceStore.getInstance().getOneStore(SessionManager.getUser().getId()) != null)
+                new DetaileStoreForm(ServiceStore.getInstance().getOneStore(SessionManager.getUser().getId()).getId()).show();
             // Clear the form fields
             nameField.clear();
             locationField.clear();

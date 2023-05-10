@@ -39,6 +39,9 @@ import com.storeship.Produit.AfficherProduit;
 import com.storeship.Reclamation.ReclamationStat;
 import com.storeship.Store.DetaileStoreForm;
 import com.storeship.Store.ListStoresForm;
+import com.storeship.Store.NewStoreForm;
+import com.storeship.entities.Store;
+import com.storeship.services.ServiceStore;
 
 /**
  * Base class for the forms with common functionality
@@ -92,17 +95,31 @@ public class BaseForm extends Form {
         tb.addMaterialCommandToSideMenu("Profle", FontImage.MATERIAL_SETTINGS, e -> new ProfileForm(res).show());
 
         if (SessionManager.getUser().getRoles().equals("ROLE_CLIENT")) {
-                     tb.addMaterialCommandToSideMenu("Panier", FontImage.MATERIAL_PAYMENTS, e->new PanierForm(res).show());
+            tb.addMaterialCommandToSideMenu("Panier", FontImage.MATERIAL_PAYMENTS, e -> new PanierForm(res).show());
             tb.addMaterialCommandToSideMenu("Historique Commande", FontImage.MATERIAL_EXIT_TO_APP, e -> new CommandeForm(res).show());
-                        tb.addMaterialCommandToSideMenu("Liste Evenement", FontImage.MATERIAL_EXIT_TO_APP, e -> new ListEvenementForm(res).show());
-                        tb.addMaterialCommandToSideMenu("Liste Store", FontImage.MATERIAL_EXIT_TO_APP, e -> new ListStoresForm(res).show());
-                        tb.addMaterialCommandToSideMenu("Liste Produit", FontImage.MATERIAL_EXIT_TO_APP, e -> new AfficherProduit().show());
-                        tb.addMaterialCommandToSideMenu("Reclamation Stats", FontImage.MATERIAL_EXIT_TO_APP, e -> new ReclamationStat().show());
+            tb.addMaterialCommandToSideMenu("Liste Evenement", FontImage.MATERIAL_EXIT_TO_APP, e -> new ListEvenementForm(res).show());
+            tb.addMaterialCommandToSideMenu("Liste Store", FontImage.MATERIAL_EXIT_TO_APP, e -> new ListStoresForm(res).show());
+            tb.addMaterialCommandToSideMenu("Liste Produit", FontImage.MATERIAL_EXIT_TO_APP, e -> new AfficherProduit().show());
+            tb.addMaterialCommandToSideMenu("Reclamation Stats", FontImage.MATERIAL_EXIT_TO_APP, e -> new ReclamationStat().show());
 
-        } else if(SessionManager.getUser().getRoles().equals("ROLE_PARTNER")){
+        } else if (SessionManager.getUser().getRoles().equals("ROLE_PARTNER")) {
             try {
-                            tb.addMaterialCommandToSideMenu("My Store", FontImage.MATERIAL_EXIT_TO_APP, e -> new DetaileStoreForm(SessionManager.getUser().getId()).show());
+                Store store = ServiceStore.getInstance().getOneStore(SessionManager.getUser().getId());
+
+                tb.addMaterialCommandToSideMenu("My Store", FontImage.MATERIAL_EXIT_TO_APP, e -> {
+                    if (store == null) {
+                        System.out.println("message 1");
+                        new NewStoreForm(res).show();
+                        System.out.println("message 2");
+                    } else {
+                        System.out.println("messsage 3");
+                        new DetaileStoreForm(SessionManager.getUser().getId()).show();
+                        System.out.println("message 4");
+
+                    }
+                });
             } catch (Exception e) {
+                e.printStackTrace();
             }
             tb.addMaterialCommandToSideMenu("Partner Commande", FontImage.MATERIAL_EXIT_TO_APP, e -> new StoreCommandeForm(res).show());
 
@@ -111,6 +128,5 @@ public class BaseForm extends Form {
         tb.addMaterialCommandToSideMenu("Logout", FontImage.MATERIAL_EXIT_TO_APP, e -> new SignInForm(res).show());
 
     }
-    
-    
+
 }

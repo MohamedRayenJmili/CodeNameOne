@@ -72,6 +72,7 @@ public class SignInForm extends BaseForm {
         {
              boolean connected=  ServiceUtilisateur.getInstance().signin(email, password, res);
              if (connected)  {
+                 
              new ProfileForm(res).show();                 
              }
 else
